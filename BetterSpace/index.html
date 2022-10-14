@@ -45,29 +45,18 @@
     </div>
     <div id="unity-warning"> </div>
     <div id="unity-footer">
-      <div id="unity-diskord-button"></div>
+      <!-- <div id="unity-diskord-button"></div> -->
       <div id="unity-telegram-button"></div>
-      <div id="unity-fullscreen-button"></div>
+      <!-- <div id="unity-fullscreen-button"></div> -->
       <div id="unity-build-title">BetterSpace</div>
     </div>
   </div>
-
-
-
-
-
-
-
-
-
-
-
   <script>
     var container = document.querySelector("#unity-container");
     var canvas = document.querySelector("#unity-canvas");
     var loadingBar = document.querySelector("#unity-loading-bar");
     var progressBarFull = document.querySelector("#unity-progress-bar-full");
-    var fullscreenButton = document.querySelector("#unity-fullscreen-button");
+    // var fullscreenButton = document.querySelector("#unity-fullscreen-button");
     var warningBanner = document.querySelector("#unity-warning");
 
     // Shows a temporary message banner/ribbon for a few seconds, or
@@ -95,11 +84,11 @@
     }
 
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/BetterSpace.loader.js";
+    var loaderUrl = buildUrl + "/betterspace-build.loader.js";
     var config = {
-      dataUrl: buildUrl + "/BetterSpace.data",
-      frameworkUrl: buildUrl + "/BetterSpace.framework.js",
-      codeUrl: buildUrl + "/BetterSpace.wasm",
+      dataUrl: buildUrl + "/betterspace-build.data",
+      frameworkUrl: buildUrl + "/betterspace-build.framework.js",
+      codeUrl: buildUrl + "/betterspace-build.wasm",
       streamingAssetsUrl: "StreamingAssets",
       companyName: "DefaultCompany",
       productName: "VoxelGenerator",
@@ -132,8 +121,12 @@
     } else {
       // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-      canvas.style.width = "1280px";
-      canvas.style.height = "720px";
+      var bufheight = window.screen.height * (720 / 1080);
+      var bufwidth = window.screen.width * (1280 / 1920);
+
+      canvas.style.height = bufheight + "px";
+      canvas.style.width = bufwidth + "px";
+
     }
 
     loadingBar.style.display = "block";
@@ -147,9 +140,9 @@
       }).then((unityInstance) => {
         myGameInstance = unityInstance;
         loadingBar.style.display = "none";
-        fullscreenButton.onclick = () => {
-          unityInstance.SetFullscreen(1);
-        };
+        // fullscreenButton.onclick = () => {
+        //   unityInstance.SetFullscreen(1);
+        // };
       }).catch((message) => {
         alert(message);
       });
