@@ -121,12 +121,16 @@
     } else {
       // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-      var bufheight = window.screen.height * (720 / 1080);
-      var bufwidth = window.screen.width * (1280 / 1920);
+      var bufwidth = window.innerWidth * 0.9;
+      var bufheight = bufwidth * (720 / 1280);
 
-      canvas.style.height = bufheight + "px";
+      if (bufheight > window.innerHeight) {
+        var bufheight = window.innerHeight * 0.8;
+        var bufwidth = bufheight * (1280 / 720);
+      }
+
       canvas.style.width = bufwidth + "px";
-
+      canvas.style.height = bufheight + "px";
     }
 
     loadingBar.style.display = "block";
