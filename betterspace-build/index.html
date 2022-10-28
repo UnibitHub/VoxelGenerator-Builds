@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -19,11 +19,12 @@
     }
 
     .shadow {
-      box-shadow: 0 0 20px rgba(0, 0, 0, .2);
-      border: 2px solid rgb(255, 255, 255);
+      box-shadow: 0 0 3px rgba(0, 0, 0, .3);
       /* Параметры тени */
       padding: 0px;
     }
+
+    /* Gray */
   </style>
 
 
@@ -45,10 +46,12 @@
     </div>
     <div id="unity-warning"> </div>
     <div id="unity-footer">
-      <!-- <div id="unity-diskord-button"></div> -->
-      <div id="unity-telegram-button"></div>
-      <!-- <div id="unity-fullscreen-button"></div> -->
-      <div id="unity-build-title">BetterSpace</div>
+        <!-- <div id="unity-diskord-button"></div> -->
+
+        <!-- <a href="#" onclick="onTelegramIconClick('https://t.me/better_space_x');return false;" id="unity-telegram-button"></a> -->
+        <a href="https://t.me/better_space_x" id="unity-telegram-button"></a>
+        <!-- <div id="unity-fullscreen-button"></div> -->
+        <div id="unity-build-title">@better_space_x</div>
     </div>
   </div>
   <script>
@@ -121,11 +124,11 @@
     } else {
       // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
 
-      var bufwidth = window.innerWidth * 0.9;
+      var bufwidth = window.innerWidth * 0.8;
       var bufheight = bufwidth * (720 / 1280);
 
-      if (bufheight > window.innerHeight) {
-        var bufheight = window.innerHeight * 0.8;
+      if (bufheight > (window.innerHeight * 0.8)) {
+        var bufheight = window.innerHeight * 0.6;
         var bufwidth = bufheight * (1280 / 720);
       }
 
@@ -175,6 +178,17 @@
       }
       myGameInstance.SendMessage("JSManager", "ErrorB", browser.toString());
     }
+
+    function checkNetworking() {
+      if (!navigator.onLine) {
+        myGameInstance.SendMessage("JSManager", "ErrorN", "");
+      }
+    }
+
+      <!-- function onTelegramIconClick(URL) { -->
+          <!-- window.open(URL, '_blank'); -->
+          <!-- myGameInstance.SendMessage("JSManager", "Test", ""); -->
+    <!-- } -->
   </script>
 </body>
 
