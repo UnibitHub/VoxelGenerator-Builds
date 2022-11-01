@@ -19,11 +19,11 @@
       </div>
     </div>
     <div id="unity-footer">
-        <!-- <div id="unity-diskord-button"></div> -->
-
-        <a href="#" onclick="onTelegramIconClick('https://t.me/better_space_x');return false;" id="unity-telegram-button"></a>
-        <!-- <div id="unity-fullscreen-button"></div> -->
-        <div id="unity-build-title">@better_space_x</div>
+      <!-- <div id="unity-diskord-button"></div> -->
+      <a href="#" onclick="onTelegramIconClick('https://t.me/better_space_x');return false;"
+        id="unity-telegram-button"></a>
+      <!-- <div id="unity-fullscreen-button"></div> -->
+      <div id="unity-build-title">@better_space_x</div>
     </div>
   </div>
   <script>
@@ -39,17 +39,15 @@
       canvas.style.height = ((window.innerWidth * 0.8) * (720 / 1280)) + "px";
       canvas.style.width = (window.innerWidth * 0.8) + "px";
     }
-
     var loaderUrl = "Build/betterspace-build.loader.js";
-
     var script = document.createElement("script");
     script.src = loaderUrl;
     var myGameInstance = null;
-                                                          
+
     script.onload = () => {
       var config = createNewConfig("Build");
-      onGameInstanceLoaded();
       createNewUnityInstance();
+      onGameInstanceLoaded();
     };
     document.body.appendChild(script);
   </script>

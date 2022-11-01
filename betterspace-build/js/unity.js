@@ -2,7 +2,6 @@
 
 var jsonData = "";
 
-
 function checkBrowser() {
     var browser, uAgent = navigator.userAgent;
     if (uAgent.search("Firefox") > -1) {
@@ -33,14 +32,35 @@ function checkNetworking() {
 }
 
 function newBuild(data) {
-    jsonData = data;
+    if (jsonData == "") {
+        jsonData = data;
+        myGameInstance.SendMessage("JSManager", "LoadMPScenne", "");
+    } else {
+        myGameInstance.Quit().then(function () {
+            var loaderUrl = "Build2/betterspace-build.loader.js";
+            var script = document.createElement("script");
+            script.src = loaderUrl;
+            var myGameInstance = null;
 
-    myGameInstance.Quit().then(function () {
-        myGameInstance = null;
-        var config = createNewConfig("Build2");
-        createNewUnityInstance();
-    });
+            script.onload = () => {
+                var config = createNewConfig("Build2");
+                createNewUnityInstance();
+            };
+            document.body.appendChild(script);
+        });
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 function createNewUnityInstance() {
@@ -61,28 +81,20 @@ function createNewConfig(NewbuildUrl) {
     };
 }
 
-
-
-
-
-
-
 function getData() {
-    console.log("111111");
     console.log(jsonData);
     myGameInstance.SendMessage("JSManager", "GetDataResponse", jsonData);
 }
 
 function onTelegramIconClick(URL) {
-      window.open(URL, '_blank');
-      
-      if(myGameInstance != null)
+    window.open(URL, '_blank');
+
+    if (myGameInstance != null)
         myGameInstance.SendMessage("JSManager", "OnTelegramIconClick");
-      else
+    else
         console.log("myGameInstance is null");
 }
 
 function onGameInstanceLoaded() {
-      myGameInstance.SendMessage("JSManager", "OnGameInstanceLoaded");
+    myGameInstance.SendMessage("JSManager", "OnGameInstanceLoaded");
 }
-
