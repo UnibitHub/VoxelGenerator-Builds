@@ -115,8 +115,7 @@ function getSystemInfo() {
 	
 	var systemInfo = 
 	{
-		"ram": navigator.deviceMemory,
-		"platform": navigator.platform,
+		"minRam": navigator.deviceMemory,
 		"hardwareConcurrency": navigator.hardwareConcurrency,
 		"renderer": renderer
 	}
