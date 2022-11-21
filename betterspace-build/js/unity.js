@@ -2,27 +2,21 @@
 
 var jsonData = "";
 
-function checkBrowser() {
-    var browser, uAgent = navigator.userAgent;
-    if (uAgent.search("Firefox") > -1) {
-        browser = "Mozilla Firefox";
-    }
-    else if (uAgent.indexOf("OPR") > -1) {
-        browser = "Opera";
-    }
-    else if (uAgent.indexOf("Trident") > -1) {
-        browser = "Microsoft Internet Explorer";
-    }
-    else if (uAgent.indexOf("YaBrowser") > -1) {
-        browser = "Yandex";
-    }
-    else if (uAgent.search("Chrome") > -1) {
-        browser = "Google Chrome";
-    }
-    else if (uAgent.indexOf("Safari") > -1) {
-        browser = "Safari";
-    }
-    myGameInstance.SendMessage("JSManager", "ErrorB", browser.toString());
+function getBrowserName() {
+	var browserName = (function (agent) {        
+		switch (true) {
+            case agent.indexOf("edge") > -1: return "MS Edge";
+            case agent.indexOf("edg/") > -1: return "Edge ( chromium based)";
+            case agent.indexOf("opr") > -1 && !!window.opr: return "Opera";
+            case agent.indexOf("chrome") > -1 && !!window.chrome: return "Google Chrome";
+            case agent.indexOf("trident") > -1: return "MS IE";
+            case agent.indexOf("firefox") > -1: return "Mozilla Firefox";
+            case agent.indexOf("safari") > -1: return "Safari";
+            default: return "other";
+        }
+    })(window.navigator.userAgent.toLowerCase());
+	
+	return browserName;
 }
 
 function checkNetworking() {
