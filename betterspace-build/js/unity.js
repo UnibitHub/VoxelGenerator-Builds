@@ -74,11 +74,34 @@ function stopProgressBar() {
 	}
 }
 
+function loadBuild(loaderUrl, configName) {
+
+    if (((window.innerWidth * 0.8) * (720 / 1280)) > (window.innerHeight * 0.8)) {
+      canvas.style.height = (window.innerHeight * 0.6) + "px";
+      canvas.style.width = ((window.innerHeight * 0.6) * (1280 / 720)) + "px";
+    } else {
+      canvas.style.height = ((window.innerWidth * 0.8) * (720 / 1280)) + "px";
+      canvas.style.width = (window.innerWidth * 0.8) + "px";
+    }
+	
+	loadingBar.style.display = "block";
+	
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    var myGameInstance = null;
+
+    script.onload = () => {
+      var config = createNewConfig(configName);
+      createNewUnityInstance();
+    };
+    document.body.appendChild(script);
+}
+
 function createNewUnityInstance() {
+	var progressIntermediateGoal = 70;
     createUnityInstance(canvas, config, (progress) => {
 		if (progressBarIntervalId == null && checkFullProgressBar == false) {
 			if (progress > 0.80) {
-				var progressIntermediateGoal = 70;
 				//var progressIntermediateGoal = 100 * progress;
 				if (lastProgressBarValue == 0){
 					moveProgressBar(0, 0.065, progressIntermediateGoal);
@@ -87,6 +110,7 @@ function createNewUnityInstance() {
 				}
 			} else {
 				progressBarFull.style.width = 100 * progress + "%";
+				progressIntermediateGoal = 100 * progress;
 			}
 		}
 		

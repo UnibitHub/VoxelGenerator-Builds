@@ -7,9 +7,10 @@
   <title>Unity WebGL Player | BetterSpace</title>
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
-  <script type="text/javascript" src="js/redirects.js"></script>
   <script type="text/javascript" src="js/xmlhttprequest-length-computable.min.js"></script>
+  <script type="text/javascript" src="js/unity.js"></script>
 </head>
+
 
 <body>
   <div id="unity-container" class="unity-desktop">
@@ -28,34 +29,6 @@
       <div id="unity-build-title">@better_space_x</div>
     </div>
   </div>
-  <script>
-    var container = document.querySelector("#unity-container");
-    var canvas = document.querySelector("#unity-canvas");
-    var loadingBar = document.querySelector("#unity-loading-bar");
-    var progressBarFull = document.querySelector("#unity-progress-bar-full");
-
-    if (((window.innerWidth * 0.8) * (720 / 1280)) > (window.innerHeight * 0.8)) {
-      canvas.style.height = (window.innerHeight * 0.6) + "px";
-      canvas.style.width = ((window.innerHeight * 0.6) * (1280 / 720)) + "px";
-    } else {
-      canvas.style.height = ((window.innerWidth * 0.8) * (720 / 1280)) + "px";
-      canvas.style.width = (window.innerWidth * 0.8) + "px";
-    }
-	
-	loadingBar.style.display = "block";
-	
-    var loaderUrl = "Build/betterspace-build.loader.js";
-    var script = document.createElement("script");
-    script.src = loaderUrl;
-    var myGameInstance = null;
-
-    script.onload = () => {
-      var config = createNewConfig("Build");
-      createNewUnityInstance();
-    };
-    document.body.appendChild(script);
-  </script>
+<script type="text/javascript" src="js/redirects.js"></script>
 </body>
-<script type="text/javascript" src="js/unity.js"></script>
-
 </html>
