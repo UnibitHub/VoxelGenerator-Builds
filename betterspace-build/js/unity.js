@@ -21,20 +21,20 @@ function getBrowserName() {
 
 function checkNetworking() {
     if (!navigator.onLine) {
-        myGameInstance.SendMessage("JSManager", "ErrorN", "");
+        gameInstance.SendMessage("JSManager", "ErrorN", "");
     }
 }
 
 function newBuild(data) {
     if (jsonData == "") {
         jsonData = data;
-        myGameInstance.SendMessage("JSManager", "LoadMPScenne", "");
+        gameInstance.SendMessage("JSManager", "LoadMPScenne", "");
     } else {
-        myGameInstance.Quit().then(function () {
+        gameInstance.Quit().then(function () {
             var loaderUrl = "Build2/betterspace-build.loader.js";
             var script = document.createElement("script");
             script.src = loaderUrl;
-            var myGameInstance = null;
+            var gameInstance = null;
 
             script.onload = () => {
                 var config = createNewConfig("Build2");
@@ -88,7 +88,7 @@ function loadBuild(loaderUrl, configName) {
 	
     var script = document.createElement("script");
     script.src = loaderUrl;
-    var myGameInstance = null;
+    var gameInstance = null;
 
     script.onload = () => {
       var config = createNewConfig(configName);
@@ -116,7 +116,7 @@ function createNewUnityInstance() {
 		
 		lastProgressBarValue = progress;
       }).then((unityInstance) => {
-        myGameInstance = unityInstance;
+        gameInstance = unityInstance;
 		stopProgressBar();
 		progressBarFull.style.width = 100 + "%";
 		loadingBar.style.display = "none";
@@ -137,16 +137,16 @@ function createNewConfig(NewbuildUrl) {
 
 function getData() {
     console.log(jsonData);
-    myGameInstance.SendMessage("JSManager", "GetDataResponse", jsonData);
+    gameInstance.SendMessage("JSManager", "GetDataResponse", jsonData);
 }
 
 function onTelegramIconClick(URL) {
     window.open(URL, '_blank');
 
-    if (myGameInstance != null)
-        myGameInstance.SendMessage("JSManager", "OnTelegramIconClick");
+    if (gameInstance != null)
+        gameInstance.SendMessage("JSManager", "OnTelegramIconClick");
     else
-        console.log("myGameInstance is null");
+        console.log("gameInstance is null");
 }
 
 function getSystemInfo() {
@@ -174,7 +174,7 @@ function getSystemInfo() {
 		"renderer": renderer
 	}
 	
-	myGameInstance.SendMessage("JSManager", "SetSystemInfo", JSON.stringify(systemInfo));
+	gameInstance.SendMessage("JSManager", "SetSystemInfo", JSON.stringify(systemInfo));
 }
 
 function getUnmaskedInfo(gl) {
