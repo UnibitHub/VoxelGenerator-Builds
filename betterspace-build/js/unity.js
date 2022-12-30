@@ -116,6 +116,7 @@ function createNewUnityInstance() {
 		
 		lastProgressBarValue = progress;
       }).then((unityInstance) => {
+		window.unityInstance = unityInstance;
         myGameInstance = unityInstance;
 		stopProgressBar();
 		progressBarFull.style.width = 100 + "%";
