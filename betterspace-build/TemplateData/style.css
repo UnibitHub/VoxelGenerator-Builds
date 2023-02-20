@@ -30,7 +30,7 @@ body {
 #unity-loading-bar {
     position: absolute;
     left: 50%;
-    top: 50%;
+    bottom: 7%;
     transform: translate(-50%, -50%);
     display: none
 }
@@ -45,7 +45,7 @@ body {
     width: 141px;
     height: 18px;
     margin-top: 10px;
-    margin-left: 6.5px;
+    margin-left: 20px;
     background: url('progress-bar-empty-dark.png') no-repeat center
 }
 
@@ -97,20 +97,4 @@ body {
     background: white;
     padding: 10px;
     display: none
-}
-
-html {
-    height: 100%;
-}
-
-body {
-    margin: 0;
-    height: 100%;
-    background: url(bg.png);
-    background-size: cover;
-}
-
-.shadow {
-    box-shadow: 0 0 3px rgba(0, 0, 0, .3);
-    padding: 0px;
 }

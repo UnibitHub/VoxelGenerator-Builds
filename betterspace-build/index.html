@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en-us">
+
 <head>
+  <style>
+    html {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      height: 100%;
+      background: url(TemplateData/bg.png);
+      background-size: cover;
+    }
+
+    .shadow {
+      box-shadow: 0 0 20px rgba(0, 0, 0, .2);
+      border: 2px solid rgb(255, 255, 255);
+      padding: 0px;
+    }
+  </style>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>MEGASKIN</title>
+  <title>MegaMod</title>
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
-  <script type="text/javascript" src="js/xmlhttprequest-length-computable.min.js"></script>
-  <script type="text/javascript" src="js/unity.js"></script>
 </head>
+
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"></script>
   <div id="unity-container" class="unity-desktop">
+    <img class="shadow" id="SPLASH_SCREEN2" src="TemplateData/SPLASH_SCREEN2.png" style="position: absolute;">
+    <img class="shadow" id="SPLASH_SCREEN" src="TemplateData/SPLASH_SCREEN.png" style="position: absolute;">
+    <p id="text_change" style="position: absolute; left: 50%; bottom: 9%; color: rgb(255, 255, 255);">123</p>
     <canvas class="shadow" id="unity-canvas" width=1280 height=720></canvas>
     <div id="unity-loading-bar">
-      <div id="unity-logo"></div>
       <div id="unity-progress-bar-empty">
         <div id="unity-progress-bar-full"></div>
       </div>
     </div>
-    <div id="unity-footer">
-      <!-- <div id="unity-diskord-button"></div> -->
-      <!-- <a href="#" onclick="onTelegramIconClick('');return false;" id="unity-telegram-button"></a> -->
-      <!-- <div id="unity-fullscreen-button"></div> -->
-      <!-- <div id="unity-build-title">@better_space_x</div> -->
-    </div>
+    <div id="unity-warning"> </div>
+    <!-- <div id="unity-footer">
+      <div id="unity-telegram-button"></div>
+      <div id="unity-build-title">BetterSpace</div>
+    </div> -->
   </div>
   <script type="text/javascript" src="js/redirects.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
@@ -38,13 +59,90 @@
   firebaseInit();
   //#endregion Firebase
   </script>
-  
   <script>
-  var container = document.querySelector("#unity-container");
-  var canvas = document.querySelector("#unity-canvas");
-  var loadingBar = document.querySelector("#unity-loading-bar");
-  var progressBarFull = document.querySelector("#unity-progress-bar-full");
-  loadBuild("Build/betterspace-build.loader.js", "Build");
+    var p = document.getElementById('text_change');
+    var container = document.querySelector("#unity-container");
+    var canvas = document.querySelector("#unity-canvas");
+    var SPLASH_SCREEN = document.querySelector("#SPLASH_SCREEN");
+    var SPLASH_SCREEN2 = document.querySelector("#SPLASH_SCREEN2");
+    var loadingBar = document.querySelector("#unity-loading-bar");
+    var progressBarFull = document.querySelector("#unity-progress-bar-full");
+    var warningBanner = document.querySelector("#unity-warning");
+
+    SPLASH_SCREEN2.style.display = "none";
+
+    function unityShowBanner(msg, type) {
+      function updateBannerVisibility() {
+        warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
+      }
+      var div = document.createElement('div');
+      div.innerHTML = msg;
+      warningBanner.appendChild(div);
+      if (type == 'error') div.style = 'background: red; padding: 10px;';
+      else {
+        if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
+        setTimeout(function () {
+          warningBanner.removeChild(div);
+          updateBannerVisibility();
+        }, 5000);
+      }
+      updateBannerVisibility();
+    }
+
+    var buildUrl = "Build";
+    var loaderUrl = buildUrl + "/betterspace-build.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/betterspace-build.data.unityweb",
+      frameworkUrl: buildUrl + "/betterspace-build.framework.js.unityweb",
+      codeUrl: buildUrl + "/betterspace-build.wasm.unityweb",
+      symbolsUrl: buildUrl + "/",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "MegaMod",
+      productVersion: "0.1",
+      showBanner: unityShowBanner,
+    };
+
+    if (((window.innerWidth * 0.8) * (720 / 1280)) > (window.innerHeight * 0.8)) {
+      canvas.style.height = (window.innerHeight * 0.8) + "px";
+      canvas.style.width = ((window.innerHeight * 0.8) * (1280 / 720)) + "px";
+    } else {
+      canvas.style.height = ((window.innerWidth * 0.8) * (720 / 1280)) + "px";
+      canvas.style.width = (window.innerWidth * 0.8) + "px";
+    }
+
+    SPLASH_SCREEN.style.height = canvas.style.height;
+    SPLASH_SCREEN.style.width = canvas.style.width;
+    SPLASH_SCREEN2.style.height = canvas.style.height;
+    SPLASH_SCREEN2.style.width = canvas.style.width;
+
+    loadingBar.style.display = "block";
+
+
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    var myGameInstance = null;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+        progressBarFull.style.width = 100 * progress + "%";
+        p.innerHTML = Math.ceil(100 * progress) + "%";
+      }).then((unityInstance) => {
+	    window.unityInstance = unityInstance;
+        myGameInstance = unityInstance;
+        SPLASH_SCREEN.style.display = "none";
+        SPLASH_SCREEN2.style.display = "block";
+        loadingBar.style.display = "none";
+        p.style.display = "none";
+        setTimeout(function () {
+          SPLASH_SCREEN2.style.display = "none";
+        }, 2500);
+      }).catch((message) => {
+        alert(message);
+      });
+
+    };
+    document.body.appendChild(script);
   </script>
 </body>
+
 </html>
