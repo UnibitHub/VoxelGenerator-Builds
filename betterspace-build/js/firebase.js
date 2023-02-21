@@ -41,7 +41,7 @@ function firebaseInit() {
 	projectId: "dev-blocks-ee2af",
 	storageBucket: "dev-blocks-ee2af.appspot.com",
 	messagingSenderId: "132218426245",
-	appId: "1:132218426245:web:d1d9adb090e15506242aec"
+	appId: "1:132218426245:web:8ba53860edcbb715242aec"
   };
 
   /* // Initialize Firebase */ 
