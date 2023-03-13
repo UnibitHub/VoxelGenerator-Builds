@@ -132,7 +132,7 @@
     script.onload = () => {
       createUnityInstance(canvas, config, (progress) => {
         progressBarFull.style.width = 100 * progress + "%";
-        p.innerHTML = Math.ceil(100 * progress) + "%";
+        <!--p.innerHTML = Math.ceil(100 * progress) + "%";-->
       }).then((unityInstance) => {
 	    window.unityInstance = unityInstance;
         myGameInstance = unityInstance;
