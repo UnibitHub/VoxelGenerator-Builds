@@ -34,7 +34,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"></script>
   
   <div id="unity-container" class="unity-desktop">
-	<div>
+	<div id="loading-bar-dots">
     <img class="shadow" id="SPLASH_SCREEN" src="TemplateData/SPLASH_SCREEN.png" style="position: absolute;">
 	<div style="position: absolute; left: 50%; bottom: 7%; transform: translate(-50%, -50%);">
 		<div style="position: relative; left: 0px; top: 12px">
@@ -42,7 +42,7 @@
 		</div>
 	</div>
 	</div>
-    <p id="text_change" style="position: absolute; left: 50%; bottom: 9%; color: rgb(255, 255, 255); display:none;"></p>
+    <!--<p id="text_change" style="position: absolute; left: 50%; bottom: 9%; color: rgb(255, 255, 255); display:none;"></p>-->
     <canvas class="shadow" id="unity-canvas" width=1280 height=720></canvas>
     <div id="unity-loading-bar">
       <div id="unity-progress-bar-empty">
@@ -74,6 +74,7 @@
     var canvas = document.querySelector("#unity-canvas");
     var SPLASH_SCREEN = document.querySelector("#SPLASH_SCREEN");
     var loadingBar = document.querySelector("#unity-loading-bar");
+	var loadingBarDots = document.querySelector("#loading-bar-dots");
     var progressBarFull = document.querySelector("#unity-progress-bar-full");
     var warningBanner = document.querySelector("#unity-warning");
 
@@ -136,12 +137,10 @@
 	    window.unityInstance = unityInstance;
         myGameInstance = unityInstance;
         loadingBar.style.display = "none";
-<<<<<<< HEAD
+
 		loadingBarDots.style.display = "none";
         <!--p.style.display = "none";-->
-=======
-        p.style.display = "none";
->>>>>>> parent of 5515cb2 (Update index.html)
+
         setTimeout(function () {
           SPLASH_SCREEN.style.display = "none";
         }, 2500);
