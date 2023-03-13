@@ -74,7 +74,6 @@
     var canvas = document.querySelector("#unity-canvas");
     var SPLASH_SCREEN = document.querySelector("#SPLASH_SCREEN");
     var loadingBar = document.querySelector("#unity-loading-bar");
-	var loadingBarDots = document.querySelector("#loading-bar-dots");
     var progressBarFull = document.querySelector("#unity-progress-bar-full");
     var warningBanner = document.querySelector("#unity-warning");
 
@@ -132,13 +131,17 @@
     script.onload = () => {
       createUnityInstance(canvas, config, (progress) => {
         progressBarFull.style.width = 100 * progress + "%";
-        <!--p.innerHTML = Math.ceil(100 * progress) + "%";-->
+        p.innerHTML = Math.ceil(100 * progress) + "%";
       }).then((unityInstance) => {
 	    window.unityInstance = unityInstance;
         myGameInstance = unityInstance;
         loadingBar.style.display = "none";
+<<<<<<< HEAD
 		loadingBarDots.style.display = "none";
         <!--p.style.display = "none";-->
+=======
+        p.style.display = "none";
+>>>>>>> parent of 5515cb2 (Update index.html)
         setTimeout(function () {
           SPLASH_SCREEN.style.display = "none";
         }, 2500);
@@ -151,4 +154,4 @@
   </script>
 </body>
 
-</html></html>
+</html>
