@@ -34,7 +34,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"></script>
   
   <div id="unity-container" class="unity-desktop">
-	<div id="loading-bar-dots">
+	<div>
     <img class="shadow" id="SPLASH_SCREEN" src="TemplateData/SPLASH_SCREEN.png" style="position: absolute;">
 	<div style="position: absolute; left: 50%; bottom: 7%; transform: translate(-50%, -50%);">
 		<div style="position: relative; left: 0px; top: 12px">
@@ -98,16 +98,16 @@
     }
 
     var buildUrl = "Build";
-    var loaderUrl = buildUrl + "/{{{LOADER_FILENAME}}}";
+    var loaderUrl = buildUrl + "/betterspace-build.loader.js";
     var config = {
-      dataUrl: buildUrl + "/{{{DATA_FILENAME}}}",
-      frameworkUrl: buildUrl + "/{{{FRAMEWORK_FILENAME}}}",
-      codeUrl: buildUrl + "/{{{CODE_FILENAME}}}",
-      symbolsUrl: buildUrl + "/{{{SYMBOLS_FILENAME}}}",
+      dataUrl: buildUrl + "/betterspace-build.data.unityweb",
+      frameworkUrl: buildUrl + "/betterspace-build.framework.js.unityweb",
+      codeUrl: buildUrl + "/betterspace-build.wasm.unityweb",
+      symbolsUrl: buildUrl + "/",
       streamingAssetsUrl: "StreamingAssets",
-      companyName: "{{{COMPANY_NAME}}}",
-      productName: "{{{PRODUCT_NAME}}}",
-      productVersion: "{{{PRODUCT_VERSION}}}",
+      companyName: "DefaultCompany",
+      productName: "MegaMod",
+      productVersion: "0.1",
       showBanner: unityShowBanner,
     };
 
@@ -151,4 +151,4 @@
   </script>
 </body>
 
-</html>
+</html></html>
