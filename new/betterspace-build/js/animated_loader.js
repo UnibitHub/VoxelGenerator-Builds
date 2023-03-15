@@ -1,8 +1,9 @@
 // Setup the canvas element.
-var canvas = document.getElementById("loader_canvas");
-var context = canvas.getContext("2d");
-var canvasWidth = canvas.width;
-var canvasHeight = canvas.height;
+var canvas = $("canvas.dots");
+var context = canvas[0].getContext("2d");
+var canvasWidth = canvas.width();
+var canvasHeight = canvas.height();
+canvas.attr({ height: canvasHeight, width: canvasWidth });
 var image_loaded = false;
 const img = new Image();
 img.src = "TemplateData/SPLASH_SCREEN.jpg";
