@@ -12,6 +12,10 @@ function showEnteringPortalsLoader(){
 }
 
 function showLoader(imageSRC) {
+	if (animationReq != null){
+		return;
+	}
+	
 	var loader = document.getElementById('loader_canvas_div');
 	loader.style.display = "block";
 	
