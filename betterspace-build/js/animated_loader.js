@@ -6,9 +6,11 @@ var img = new Image();
 var arr;
 var framesCount;
 let animationReq = null;
+var offsetX = 50;
+var dotColor = "#2800D7";
 
 function showEnteringPortalsLoader(){
-	showLoader("TemplateData/SPLASH_SCREEN2.png");
+	showLoader("TemplateData/SPLASH_SCREEN_JPG.jpg");
 }
 
 function showLoader(imageSRC) {
@@ -34,19 +36,24 @@ function showLoader(imageSRC) {
 	};
 
 	// Set the number of frames we want to run.
-	framesCount = 160;
+	framesCount = 170;
+	
+	var incr = 0.5;
+	var dotRadius = 0;
 
 	// Set and create our dot.
-	var dot1 = { x: 0, y: 0, radius: 5, currentFrame: 0, incr: 0.1 };
-	var dot2 = { x: 0, y: 0, radius: 5, currentFrame: 0, incr: 0.1 };
-	var dot3 = { x: 0, y: 0, radius: 5, currentFrame: 0, incr: 0.1 };
+	var dot1 = { x: 0, y: 0, radius: dotRadius, currentFrame: 0, incr: incr, delayFrame: 0 };
+	var dot2 = { x: 0, y: 0, radius: dotRadius, currentFrame: 0, incr: incr, delayFrame: 0 };
+	var dot3 = { x: 0, y: 0, radius: dotRadius, currentFrame: 0, incr: incr, delayFrame: 0 };
+	var dot4 = { x: 0, y: 0, radius: dotRadius, currentFrame: 0, incr: incr, delayFrame: 0 };
+	var dot5 = { x: 0, y: 0, radius: dotRadius, currentFrame: 0, incr: incr, delayFrame: 0 };
 	arr = [dot1];
 
 	animationReq = requestAnimationFrame(function() {
-			moveDot(740, 675)
+			moveDot(535, 615)
 		})
 
-	var timeout = 150;
+	var timeout = 180;
 
 	setTimeout(function () {
 		arr.push(dot2);
@@ -55,6 +62,14 @@ function showLoader(imageSRC) {
 	setTimeout(function () {
 		arr.push(dot3);
 	}, timeout * 2);
+
+	setTimeout(function () {
+		arr.push(dot4);
+	}, timeout * 3);
+
+	setTimeout(function () {
+		arr.push(dot5);
+	}, timeout * 4);
 }
 
 function closeLoader(){
@@ -94,17 +109,36 @@ animationReq = requestAnimationFrame(function() {
 
 function calcDot(dot)
 {
-// Adjust the dot's x and y values down and to the right.
+  // Adjust the dot's x and y values down and to the right.
   dot.x += dot.incr;
   dot.y += dot.incr;
 
   // Move the current time forward by one frame.
   dot.currentFrame += 1;
   
+  
+  
   if (dot.currentFrame == framesCount / 2)
   {
-	dot.incr *= -1;
-	dot.currentFrame = 0;
+	  if (dot.incr < 0)
+	  {
+		  dot.delayFrame += 1;
+		  dot.currentFrame -= 1;
+		  dot.x = 0;
+		  dot.y = 0;
+		  
+		  if (dot.delayFrame == 80)
+		  {
+			  dot.incr *= -1;
+			  dot.currentFrame = 0;
+			  dot.delayFrame = 0;
+		  }
+	  }
+	  else
+	  {
+		dot.incr *= -1;
+		dot.currentFrame = 0;
+	  }
   }
 }
 
@@ -112,8 +146,8 @@ function drawDot(startX, startY) {
   context.beginPath();
   for (var i = 0; i < arr.length; i++){
     var dot = arr[i];
-	context.rect(startX + (20 * i) - dot.x / 2, startY   - dot.x / 2, dot.radius + dot.x, dot.radius + dot.x, false);
+	context.rect(startX + (offsetX * i) - dot.x / 2, startY   - dot.x / 2, dot.radius + dot.x, dot.radius + dot.x, false);
   }
-  context.fillStyle = "#808080";
+  context.fillStyle = dotColor;
   context.fill();
 }
