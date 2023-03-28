@@ -32,6 +32,7 @@
   <title>MegaMod</title>
   <link rel="shortcut icon" href="TemplateData/favicon.ico">
   <link rel="stylesheet" href="TemplateData/style.css">
+  <link rel="stylesheet" href="TemplateData/slider_style.css">
   <script type="text/javascript" src="js/unity.js"></script>
   <script type="text/javascript" src="js/helpers.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -50,6 +51,10 @@
 		<canvas class="dots" id ="loader_canvas" width=1280 height=720></canvas>
 	</div>
     <canvas class="shadow" id="unity-canvas" width=1280 height=720></canvas>
+	<div class="slidecontainer">
+		<p></p>
+		<input type="range" min="25" max="55" value="50" class="slider" id="myRange">
+	</div>
     <div id="unity-loading-bar">
       <div id="unity-progress-bar-empty">
         <div id="unity-progress-bar-full"></div>
@@ -177,6 +182,7 @@
 		document.body.appendChild(script);
 	}
   </script>
+  <script type="text/javascript" src="js/scale_slider.js"></script>
 </body>
 
 </html>
