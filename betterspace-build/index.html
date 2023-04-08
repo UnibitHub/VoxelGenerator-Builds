@@ -44,9 +44,8 @@
 	<img src="TemplateData/mobile_error/mobile_error.png" style="display: block; margin: auto;">
   </div>
   <div id="unity-container" class="unity-desktop">
-    <!--<p id="text_change" style="position: absolute; left: 50%; bottom: 9%; color: rgb(255, 255, 255);"></p>-->
 	<div id="loader_canvas_div">
-		<img class="shadow" id="SPLASH_SCREEN" src="TemplateData/SPLASH_SCREEN_JPG.jpg" style="position: absolute;">
+		 <img class="shadow" id="SPLASH_SCREEN" src="TemplateData/SPLASH_SCREEN_JPG1.png" style="position: absolute;">
 		<canvas class="dots" id ="loader_canvas" width=1280 height=720></canvas>
 	</div>
     <canvas class="shadow" id="unity-canvas" width=1280 height=720></canvas>
@@ -56,20 +55,12 @@
       </div>
     </div>
     <div id="unity-warning"> </div>
-    <!-- <div id="unity-footer">
-      <div id="unity-telegram-button"></div>
-      <div id="unity-build-title">BetterSpace</div>
-    </div> -->
   </div>
   <script type="text/javascript" src="js/redirects.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
   <script type="text/javascript" src="js/discord.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
-  <!--<script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage-compat.js"></script>-->
   <script>
   //#region Firebase
   firebaseInit();
@@ -77,10 +68,10 @@
   </script>
   <script type="text/javascript" src="js/animated_loader.js"></script>
   <script>
-  showLoader("TemplateData/SPLASH_SCREEN_JPG.jpg");
+	var num = Math.floor(Math.random() * 2); // 0...6
+  showLoader("TemplateData/SPLASH_SCREEN_JPG"+(num+1)+".png");
   </script>
   <script>
-    <!--var p = document.getElementById('text_change');-->
     var container = document.querySelector("#unity-container");
 	var mobile_error = document.querySelector("#no-phone-container");
 	
@@ -93,9 +84,6 @@
 		var canvas = document.querySelector("#unity-canvas");
 		var loader_canvas = document.querySelector("#loader_canvas");
 		var SPLASH_SCREEN = document.querySelector("#SPLASH_SCREEN");
-		<!-- var loadingBar = document.querySelector("#unity-loading-bar"); -->
-		<!-- var loadingBarDots = document.querySelector("#loading-bar-dots"); -->
-		<!-- var progressBarFull = document.querySelector("#unity-progress-bar-full"); -->
 		var warningBanner = document.querySelector("#unity-warning");
 
 
@@ -148,27 +136,18 @@
 		SPLASH_SCREEN.style.height = canvas.style.height;
 		SPLASH_SCREEN.style.width = canvas.style.width;
 
-		<!-- loadingBar.style.display = "block"; -->
-		<!-- loadingBar.style.display = "none"; -->
-
-
 		var script = document.createElement("script");
 		script.src = loaderUrl;
 		var myGameInstance = null;
 		script.onload = () => {
 		  createUnityInstance(canvas, config, (progress) => {
-			<!-- progressBarFull.style.width = 100 * progress + "%"; -->
-			<!--p.innerHTML = Math.ceil(100 * progress) + "%";-->
+
 		  }).then((unityInstance) => {
 			window.unityInstance = unityInstance;
 			myGameInstance = unityInstance;
-			<!-- loadingBar.style.display = "none"; -->
-			<!-- loadingBarDots.style.display = "none"; -->
-			<!--p.style.display = "none";-->
 
 			setTimeout(function () {
 			  closeLoader();
-			  <!-- SPLASH_SCREEN.style.display = "none"; -->
 			}, 2500);
 		  }).catch((message) => {
 			alert(message);
