@@ -146,7 +146,8 @@
 		  }).then((unityInstance) => {
 			window.unityInstance = unityInstance;
 			myGameInstance = unityInstance;
-
+			subscribeOnKeyEvents();
+			
 			setTimeout(function () {
 			  closeLoader();
 			}, 2500);
