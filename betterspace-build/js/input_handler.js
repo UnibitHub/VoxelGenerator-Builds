@@ -1,5 +1,5 @@
 function subscribeOnKeyEvents(){
-	document.addEventListener('keydown', evt => {
+	document.addEventListener('keyup', evt => {
 		if (evt.key === 'Escape') {
 			console.log("Escape: " + evt.repeat);
 			
