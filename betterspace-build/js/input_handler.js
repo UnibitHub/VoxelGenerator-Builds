@@ -7,7 +7,6 @@ function subscribeOnKeyEvents(){
 			// Cancel the default action to avoid it being handled twice
 			event.preventDefault();
 		}
-	}
-	// ,true
-	;
+	};
+	// ,true;
 }
