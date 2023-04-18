@@ -5,7 +5,7 @@ function subscribeOnKeyEvents(){
 			myGameInstance.SendMessage("JSInputHandler", "OnEscapeButtonPressed");
 			
 			// Cancel the default action to avoid it being handled twice
-			event.preventDefault();
+			evt.preventDefault();
 		}
 	};
 	// ,true;
