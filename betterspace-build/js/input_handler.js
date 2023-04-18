@@ -19,7 +19,8 @@ function subscribeOnKeyEvents(){
  
 function onMouseDown(event)
 {
-    window.focus();
+	console.log('onMouseDown focus');
+    canvas.focus();
 }
 
     function myKeyDownHandler1(){
