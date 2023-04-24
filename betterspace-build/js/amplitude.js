@@ -36,7 +36,7 @@ function sendEvent() {
 	}
 	
 	const userAction = async () => {
-		  const response = await fetch('https://better-space-api.herokuapp.com/api/game/httpApi', {
+		  const response = await fetch('https://dev-better-space-api.herokuapp.com/api/game/httpApi', {
 			method: 'POST',
 			body: myBody, // string or object
 			headers: {
