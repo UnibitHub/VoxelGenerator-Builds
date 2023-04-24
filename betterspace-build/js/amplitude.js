@@ -35,17 +35,14 @@ function sendEvent() {
 	   ]
 	}
 	
-	const userAction = async () => {
-		  const response = await fetch('https://dev-better-space-api.herokuapp.com/api/game/httpApi', {
-			method: 'POST',
-			body: myBody, // string or object
-			headers: {
-			  'Content-Type': 'application/json'
-			}
-		  });
-		  const myJson = await response.json(); //extract JSON from the http response
-		  // do something with myJson
-	}
-	
-	userAction();
+	fetch('https://dev-better-space-api.herokuapp.com/api/game/httpApi', {
+    method: 'POST',
+    headers: {
+        'Accept': '*/*',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(myBody)
+	})
+   .then(response => response.json())
+   .then(response => console.log(JSON.stringify(response)))
 }
