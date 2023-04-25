@@ -50,7 +50,7 @@ function showLoader(imageSRC) {
 	arr = [dot1];
 
 	animationReq = requestAnimationFrame(function() {
-			moveDot(535, 615)
+			moveDot(535, 565)
 		})
 
 	var timeout = 180;
