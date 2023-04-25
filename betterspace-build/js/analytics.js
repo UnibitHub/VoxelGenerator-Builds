@@ -79,6 +79,7 @@ function initAnalytics(){
 }
 
 function waitForAnalytics(callback) {
+  console.log("waitForAnalytics");
   if (typeof gtag !== 'undefined') {
     callback();
   } else {
