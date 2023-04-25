@@ -19,6 +19,7 @@ function getClientId() {
 			gtag('get', gaID, {'send_page_view': false}).then((result) => {
 			resolve(result[0].clientId);
 		});
+	 });
 	
 	// if (typeof gtag !== 'undefined'){
 		// return new Promise((resolve) => {
