@@ -59,29 +59,31 @@ function getCurrentSessionId() {
 }
 
 function generateSessionId() {
-  var currentDate = new Date().getTime(); // отримуємо поточну дату в мілісекундах
-  var sessionId = currentDate * 1000000 + Math.floor(Math.random() * 1000000); // додаємо випадкове число для унікальності
+  var currentDate = new Date().getTime();
+  var sessionId = currentDate * 1000000 + Math.floor(Math.random() * 1000000);
   return sessionId;
 }
 
 function initAnalytics(){
 	console.log("initAnalytics");
+	
+	startGoogleAnalytics();
+	startYandexAnalytics();
+	currentSessionId = getSessionId();
+	
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
-		startGoogleAnalytics();
-		startYandexAnalytics();
 		getAndSaveClientId();
-		currentSessionId = getSessionId();
 		sendEvent("Hello_World");
 	});
 }
 
 function waitForAnalytics(callback) {
-  if (typeof gtag !== 'undefined') { // перевіряємо, чи ініціалізована бібліотека аналітики
-    callback(); // викликаємо зворотний виклик, якщо бібліотека аналітики вже ініціалізована
+  if (typeof gtag !== 'undefined') {
+    callback();
   } else {
     setTimeout(function() {
-      waitForAnalytics(callback); // чекаємо 100 мілісекунд і спробуємо знову
+      waitForAnalytics(callback);
     }, 100);
   }
 }
