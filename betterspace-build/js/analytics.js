@@ -1,5 +1,7 @@
 var clientId = "";
 var currentSessionId = -1;
+const gaID = 'G-FEMF7FZS8J';
+
 
 initAnalytics();
 
@@ -7,17 +9,26 @@ function startGoogleAnalytics(){
 	window.dataLayer = window.dataLayer || [];
 	  gtag('js', new Date());
 
-	  gtag('config', 'G-SGFC31VKKL');
+	  gtag('config', gaID);
 }
 
 function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
-  return new Promise((resolve) => {
-    gtag('get', 'G-SGFC31VKKL', {'send_page_view': false}).then((result) => {
-      resolve(result[0].clientId);
-    });
-  });
+	return new Promise((resolve) => {
+			gtag('get', gaID, {'send_page_view': false}).then((result) => {
+			resolve(result[0].clientId);
+		});
+	
+	// if (typeof gtag !== 'undefined'){
+		// return new Promise((resolve) => {
+			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
+			// resolve(result[0].clientId);
+		// });
+	// });
+	// } else {
+		// return 
+	// }
 }
 
 async function getAndSaveClientId() {
