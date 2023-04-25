@@ -1,6 +1,8 @@
 var clientId = "";
 var currentSessionId = -1;
 
+initAnalytics();
+
 function startGoogleAnalytics(){
 	window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -62,7 +64,7 @@ function generateSessionId() {
   return sessionId;
 }
 
-async function initAnalytics(){
+function initAnalytics(){
 	console.log("initAnalytics");
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
