@@ -5,11 +5,12 @@ initAnalytics();
 
 function startGoogleAnalytics(){
 	window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 
 	  gtag('config', 'G-SGFC31VKKL');
 }
+
+function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
   return new Promise((resolve) => {
