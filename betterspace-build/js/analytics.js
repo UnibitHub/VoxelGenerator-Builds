@@ -89,11 +89,11 @@ function initAnalytics(){
 	getAndSaveClientId();
 	sendEvent("Hello_World");
 	
-	// waitForAnalytics(function() {
-		// console.log('Google Analytics initialized!');
-		// getAndSaveClientId();
-		// sendEvent("Hello_World");
-	// });
+	waitForAnalytics(function() {
+		console.log('Google Analytics initialized!');
+		//getAndSaveClientId();
+		//sendEvent("Hello_World");
+	});
 }
 
 function waitForAnalytics(callback) {
