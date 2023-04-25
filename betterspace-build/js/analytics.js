@@ -71,11 +71,14 @@ function initAnalytics(){
 	startYandexAnalytics();
 	currentSessionId = getSessionId();
 	
-	waitForAnalytics(function() {
-		console.log('Google Analytics initialized!');
-		getAndSaveClientId();
-		sendEvent("Hello_World");
-	});
+	getAndSaveClientId();
+	sendEvent("Hello_World");
+	
+	// waitForAnalytics(function() {
+		// console.log('Google Analytics initialized!');
+		// getAndSaveClientId();
+		// sendEvent("Hello_World");
+	// });
 }
 
 function waitForAnalytics(callback) {
