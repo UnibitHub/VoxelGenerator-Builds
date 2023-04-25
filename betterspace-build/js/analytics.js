@@ -5,23 +5,23 @@ const gaID = 'G-FEMF7FZS8J';
 
 initAnalytics();
 
-function startGoogleAnalytics(){
-	window.dataLayer = window.dataLayer || [];
-	  gtag('js', new Date());
+// function startGoogleAnalytics(){
+	// window.dataLayer = window.dataLayer || [];
+	  // gtag('js', new Date());
 
-	  gtag('config', gaID);
-}
+	  // gtag('config', gaID);
+// }
 
-function gtag(){dataLayer.push(arguments);}
+// function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
-	return "12345";
+	// return "12345";
 	
-	// return new Promise((resolve) => {
-			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
-			// resolve(result[0].clientId);
-		// });
-	 // });
+	return new Promise((resolve) => {
+			gtag('get', gaID, {'send_page_view': false}).then((result) => {
+			resolve(result[0].clientId);
+		});
+	 });
 	
 	// if (typeof gtag !== 'undefined'){
 		// return new Promise((resolve) => {
@@ -33,6 +33,13 @@ function getClientId() {
 		// return 
 	// }
 }
+
+// function getAndSaveClientId() {
+  // gtag('get', gaID, function(result) {
+		// clientId = result['client_id'];
+		// console.log('Client ID: ' + clientId);
+	// });
+// }
 
 async function getAndSaveClientId() {
   clientId = await getClientId();
@@ -86,13 +93,13 @@ function initAnalytics(){
 	startYandexAnalytics();
 	currentSessionId = getSessionId();
 	
-	getAndSaveClientId();
-	sendEvent("Hello_World");
+	//getAndSaveClientId();
+	//sendEvent("Hello_World");
 	
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
-		//getAndSaveClientId();
-		//sendEvent("Hello_World");
+		getAndSaveClientId();
+		sendEvent("Hello_World");
 	});
 }
 
