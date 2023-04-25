@@ -15,7 +15,7 @@ function startGoogleAnalytics(){
 function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
-	return "12345;
+	return "12345";
 	
 	// return new Promise((resolve) => {
 			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
