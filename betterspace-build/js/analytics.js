@@ -15,8 +15,6 @@ initAnalytics();
 // function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
-	// return "12345";
-	
 	return new Promise((resolve) => {
 			gtag('get', gaID, {'send_page_view': false}).then((result) => {
 			resolve(result[0].clientId);
@@ -35,10 +33,8 @@ function getClientId() {
 }
 
 // function getAndSaveClientId() {
-  // gtag('get', gaID, function(result) {
-		// clientId = result['client_id'];
-		// console.log('Client ID: ' + clientId);
-	// });
+  // clientId = await getClientId();
+  // console.log('getAndSaveClientId: ' + clientId);
 // }
 
 async function getAndSaveClientId() {
@@ -89,12 +85,12 @@ function generateSessionId() {
 function initAnalytics(){
 	console.log("initAnalytics");
 	
-	startGoogleAnalytics();
+	//startGoogleAnalytics();
 	startYandexAnalytics();
 	currentSessionId = getSessionId();
 	
-	//getAndSaveClientId();
-	//sendEvent("Hello_World");
+	// getAndSaveClientId();
+	// sendEvent("Hello_World");
 	
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
