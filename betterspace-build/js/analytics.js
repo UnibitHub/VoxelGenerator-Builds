@@ -27,11 +27,19 @@ function getClientId(callback) {
 function getClientIdAsync() {
 	console.log('getClientIdAsync');
 	
-	return new Promise((resolve) => {
-			gtag('get', gaID, {'send_page_view': false}).then((result) => {
-			resolve(result[0].clientId);
-		});
-	 });
+	return new Promise(function(resolve) {
+    gtag('config', gaID, {
+      'send_page_view': false,
+      'custom_map': {'dimension1': 'clientId'}
+    });
+
+    gtag('event', 'client_id_callback', {
+      'event_callback': function() {
+        var clientId = gtag.analytics.getByName('tracker').get('clientId');
+        resolve(clientId);
+      }
+    });
+  });
 }
 
 function getAndSaveClientId() {
