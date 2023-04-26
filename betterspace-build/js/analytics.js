@@ -2,77 +2,50 @@ var clientId = "";
 var currentSessionId = -1;
 const gaID = 'G-HWSS0NKVPT';
 
-
 initAnalytics();
-
-// function startGoogleAnalytics(){
-	// window.dataLayer = window.dataLayer || [];
-	  // gtag('js', new Date());
-
-	  // gtag('config', gaID);
-// }
-
-// function gtag(){dataLayer.push(arguments);}
 
 function getClientId(callback) {
 	console.log('getClientId');
 	
-	gtag('get', gaID, 'client_id', 
-	function(clientId) 
-	{
-		console.log('Client ID: ' + clientId);
-		callback(clientId);
-	});
+	const savedUuid = localStorage.getItem('userId');
 	
-	// gtag('get', gaID, function(result) {
-		  // var clientId = result['client_id'];
-		  // console.log('Client ID: ' + clientId);
-		  // callback(clientId);
-	// });
+	if (savedUuid !== null){
+		console.log('There is saved client id in local storage: ' + savedUuid);
+		callback(savedUuid);
+	} else{
+		console.log('There is no saved client id in local storage. So try to get it from gtag.');
+	
+		var gtagClientId = null;
+		
+		gtag('get', gaID, 'client_id', 
+			function(clientId) 
+			{
+				gtagClientId = clientId;
+				console.log('Client ID from gtag: ' + clientId);
+				localStorage.setItem('userId', clientId);
+				callback(clientId);
+			});
+			
+		setTimeout(function() {
+			if (gtagClientId !== null){
+					console.log('There is gtag client id: ' + gtagClientId);
+			} else{
+				const uuid = uuidv4();
+				console.log('There is no gtag client id. So generate new and save it: ' + uuid);
+				localStorage.setItem('userId', uuid);
+				callback(uuid);
+			}
+		}, 200);
+	}
 }
 
-// function getClientId(callback) {
-	// console.log('getClientId');
-	
-  // gtag('event', 'client_id_callback', {
-    // 'event_callback': function() {
-      // var trackers = window.ga.getAll();
-      // if (trackers.length > 0) {
-        // var clientId = trackers[0].get('clientId');
-        // console.log('Client ID: ' + clientId);
-        // callback(clientId);
-      // } else {
-        // console.error('Не вдалося отримати Client ID');
-      // }
-    // }
-  // });
-// }
-
-// function getClientIdAsync() {
-	// console.log('getClientIdAsync');
-	
-	// return new Promise(function(resolve) {
-    // gtag('config', gaID, {
-      // 'send_page_view': false,
-      // 'custom_map': {'dimension1': 'clientId'}
-    // });
-
-    // gtag('event', 'client_id_callback', {
-      // 'event_callback': function() {
-        // var clientId = gtag.analytics.getByName('tracker').get('clientId');
-        // resolve(clientId);
-      // }
-    // });
-  // });
-// }
-
 function getAndSaveClientId() {
-  getClientId((result => 
-  {
+	getClientId((result => 
+	{
 	  console.log('getAndSaveClientId callback: ' + clientId);
 	  clientId = result;
 	  sendEvent("Hello_World");
-  }));
+	}));
 }
 
 async function getAndSaveClientIdAsync() {
