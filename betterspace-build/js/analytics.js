@@ -44,7 +44,7 @@ function getAndSaveClientId() {
 	{
 	  clientId = result;
 	  console.log('getAndSaveClientId callback: ' + result);
-	  //sendEvent("Hello_World");
+	  sendEvent("Hello_World");
 	}));
 }
 
