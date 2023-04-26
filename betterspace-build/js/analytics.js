@@ -17,8 +17,9 @@ initAnalytics();
 function getClientId(callback) {
 	console.log('getClientId');
 	
-	ga(function(tracker) {
-		var clientId = tracker.get('clientId');
+	gtag('get', gaID, 'client_id', 
+	function(clientId) 
+	{
 		console.log('Client ID: ' + clientId);
 		callback(clientId);
 	});
