@@ -14,10 +14,13 @@ initAnalytics();
 
 // function gtag(){dataLayer.push(arguments);}
 
-function getClientId() {
+function getClientId(callback) {
+	console.log('Client ID: ' + clientId);
+	
 	gtag('get', gaID, function(result) {
-	  var clientId = result['client_id'];
-	  console.log('Client ID: ' + clientId);
+		  var clientId = result['client_id'];
+		  console.log('Client ID: ' + clientId);
+		  callback(clientId);
 	});
 	
 	// return new Promise((resolve) => {
@@ -38,7 +41,12 @@ function getClientId() {
 }
 
 function getAndSaveClientId() {
-  getClientId();
+  getClientId((result => 
+  {
+	  console.log('getAndSaveClientId callback: ' + clientId);
+	  clientId = result;
+	  sendEvent("Hello_World");
+  }));
 }
 
 // async function getAndSaveClientId() {
@@ -99,7 +107,6 @@ function initAnalytics(){
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
 		getAndSaveClientId();
-		sendEvent("Hello_World");
 	});
 }
 
