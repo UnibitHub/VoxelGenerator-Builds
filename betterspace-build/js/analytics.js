@@ -14,33 +14,50 @@ initAnalytics();
 
 // function gtag(){dataLayer.push(arguments);}
 
+// function getClientId(callback) {
+	// console.log('getClientId');
+	
+	// gtag('get', gaID, function(result) {
+		  // var clientId = result['client_id'];
+		  // console.log('Client ID: ' + clientId);
+		  // callback(clientId);
+	// });
+// }
+
 function getClientId(callback) {
 	console.log('getClientId');
 	
-	gtag('get', gaID, function(result) {
-		  var clientId = result['client_id'];
-		  console.log('Client ID: ' + clientId);
-		  callback(clientId);
-	});
-}
-
-function getClientIdAsync() {
-	console.log('getClientIdAsync');
-	
-	return new Promise(function(resolve) {
-    gtag('config', gaID, {
-      'send_page_view': false,
-      'custom_map': {'dimension1': 'clientId'}
-    });
-
-    gtag('event', 'client_id_callback', {
-      'event_callback': function() {
-        var clientId = gtag.analytics.getByName('tracker').get('clientId');
-        resolve(clientId);
+  gtag('event', 'client_id_callback', {
+    'event_callback': function() {
+      var trackers = window.ga.getAll();
+      if (trackers.length > 0) {
+        var clientId = trackers[0].get('clientId');
+        console.log('Client ID: ' + clientId);
+        callback(clientId);
+      } else {
+        console.error('Не вдалося отримати Client ID');
       }
-    });
+    }
   });
 }
+
+// function getClientIdAsync() {
+	// console.log('getClientIdAsync');
+	
+	// return new Promise(function(resolve) {
+    // gtag('config', gaID, {
+      // 'send_page_view': false,
+      // 'custom_map': {'dimension1': 'clientId'}
+    // });
+
+    // gtag('event', 'client_id_callback', {
+      // 'event_callback': function() {
+        // var clientId = gtag.analytics.getByName('tracker').get('clientId');
+        // resolve(clientId);
+      // }
+    // });
+  // });
+// }
 
 function getAndSaveClientId() {
   getClientId((result => 
@@ -109,7 +126,7 @@ function initAnalytics(){
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
 		getAndSaveClientId();
-		getAndSaveClientIdAsync();
+		// getAndSaveClientIdAsync();
 	});
 }
 
