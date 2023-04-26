@@ -28,8 +28,6 @@ function sendEvent(eventName) {
 	   ]
 	}
 	
-	console.log(myBody);
-	
 	fetch('https://dev-better-space-api.herokuapp.com/api/game/httpApi', {
 		method: 'POST',
 		headers: {
