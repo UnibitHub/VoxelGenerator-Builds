@@ -22,22 +22,16 @@ function getClientId(callback) {
 		  console.log('Client ID: ' + clientId);
 		  callback(clientId);
 	});
+}
+
+function getClientIdAsync() {
+	console.log('getClientIdAsync');
 	
-	// return new Promise((resolve) => {
-			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
-			// resolve(result[0].clientId);
-		// });
-	 // });
-	
-	// if (typeof gtag !== 'undefined'){
-		// return new Promise((resolve) => {
-			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
-			// resolve(result[0].clientId);
-		// });
-	// });
-	// } else {
-		// return 
-	// }
+	return new Promise((resolve) => {
+			gtag('get', gaID, {'send_page_view': false}).then((result) => {
+			resolve(result[0].clientId);
+		});
+	 });
 }
 
 function getAndSaveClientId() {
@@ -49,10 +43,10 @@ function getAndSaveClientId() {
   }));
 }
 
-// async function getAndSaveClientId() {
-  // clientId = await getClientId();
-  // console.log('getAndSaveClientId: ' + clientId);
-// }
+async function getAndSaveClientIdAsync() {
+  clientId = await getClientIdAsync();
+  console.log('getAndSaveClientIdAsync: ' + clientId);
+}
 
 function getSavedClientId(){
 	return clientId;
@@ -107,6 +101,7 @@ function initAnalytics(){
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
 		getAndSaveClientId();
+		getAndSaveClientIdAsync();
 	});
 }
 
