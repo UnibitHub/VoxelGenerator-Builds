@@ -31,6 +31,8 @@ function showLoader(imageSRC) {
 	img = new Image();
 	img.src = imageSRC;
 	img.onload = () => {
+	  sendEvent("Splash-Screen-Showed");
+	  sendEvent("Splash-Screen-Loading-Started");
 	  image_loaded =true;
 	  context.drawImage(img, 0, 0)
 	};

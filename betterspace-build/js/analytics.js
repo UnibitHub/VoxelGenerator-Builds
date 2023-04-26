@@ -44,7 +44,6 @@ function getAndSaveClientId() {
 	{
 	  clientId = result;
 	  console.log('getAndSaveClientId callback: ' + result);
-	  sendEvent("Hello_World");
 	}));
 }
 
@@ -96,18 +95,15 @@ function generateSessionId() {
 function initAnalytics(){
 	console.log("initAnalytics");
 	
-	//startGoogleAnalytics();
 	startYandexAnalytics();
 	currentSessionId = getSessionId();
-	
-	// getAndSaveClientId();
-	// sendEvent("Hello_World");
 	
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
 		getAndSaveClientId();
-		// getAndSaveClientIdAsync();
 	});
+	
+    sendEvent("Hello_World");
 }
 
 function waitForAnalytics(callback) {

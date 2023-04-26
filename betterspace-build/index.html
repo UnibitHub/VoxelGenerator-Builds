@@ -65,11 +65,12 @@
     </div>
     <div id="unity-warning"> </div>
   </div>
+  <script type="text/javascript" src="js/analytics.js"></script>
   <script type="text/javascript" src="js/redirects.js"></script>
   <script type="text/javascript" src="js/firebase.js"></script>
   <script type="text/javascript" src="js/discord.js"></script>
   <script type="text/javascript" src="js/amplitude.js"></script>
-  <script type="text/javascript" src="js/analytics.js"></script>
+  <script type="text/javascript" src="js/animated_loader.js"></script>
   <!--<script type="text/javascript" src="js/input_handler.js"></script>-->
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
@@ -78,7 +79,6 @@
   firebaseInit();
   //#endregion Firebase
   </script>
-  <script type="text/javascript" src="js/animated_loader.js"></script>
   <script>
 	var num = Math.floor(Math.random() * 2); // 0...6
   showLoader("TemplateData/SPLASH_SCREEN_JPG"+(num+1)+".png");
@@ -94,6 +94,7 @@
 	if (checkIfMobile()){
 		container.style.display = "none";
 		mobile_error.style.display = "flex";
+		sendEvent("HTML-No_Mobile_Version-Screen-Showed");
 	}
 	else{
 		mobile_error.remove();
@@ -156,14 +157,15 @@
 		script.src = loaderUrl;
 		var myGameInstance = null;
 		script.onload = () => {
+		  sendEvent("Unity_WebGL-Hello_world");
 		  createUnityInstance(canvas, config, (progress) => {
 
 		  }).then((unityInstance) => {
 			window.unityInstance = unityInstance;
 			myGameInstance = unityInstance;
-			
 			setTimeout(function () {
 			  closeLoader();
+			  sendEvent("Splash-Screen_Loading_Finished");
 			}, 2500);
 		  }).catch((message) => {
 			alert(message);
