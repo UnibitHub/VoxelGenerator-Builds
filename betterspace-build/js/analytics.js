@@ -15,11 +15,16 @@ initAnalytics();
 // function gtag(){dataLayer.push(arguments);}
 
 function getClientId() {
-	return new Promise((resolve) => {
-			gtag('get', gaID, {'send_page_view': false}).then((result) => {
-			resolve(result[0].clientId);
-		});
-	 });
+	gtag('get', gaID, function(result) {
+	  var clientId = result['client_id'];
+	  console.log('Client ID: ' + clientId);
+	});
+	
+	// return new Promise((resolve) => {
+			// gtag('get', gaID, {'send_page_view': false}).then((result) => {
+			// resolve(result[0].clientId);
+		// });
+	 // });
 	
 	// if (typeof gtag !== 'undefined'){
 		// return new Promise((resolve) => {
@@ -32,15 +37,14 @@ function getClientId() {
 	// }
 }
 
-// function getAndSaveClientId() {
+function getAndSaveClientId() {
+  getClientId();
+}
+
+// async function getAndSaveClientId() {
   // clientId = await getClientId();
   // console.log('getAndSaveClientId: ' + clientId);
 // }
-
-async function getAndSaveClientId() {
-  clientId = await getClientId();
-  console.log('getAndSaveClientId: ' + clientId);
-}
 
 function getSavedClientId(){
 	return clientId;
