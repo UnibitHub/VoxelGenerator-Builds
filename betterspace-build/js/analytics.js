@@ -1,6 +1,6 @@
 var clientId = "";
 var currentSessionId = -1;
-const gaID = 'G-FEMF7FZS8J';
+const gaID = 'G-HWSS0NKVPT';
 
 
 initAnalytics();
@@ -15,7 +15,7 @@ initAnalytics();
 // function gtag(){dataLayer.push(arguments);}
 
 function getClientId(callback) {
-	console.log('Client ID: ' + clientId);
+	console.log('getClientId');
 	
 	gtag('get', gaID, function(result) {
 		  var clientId = result['client_id'];
