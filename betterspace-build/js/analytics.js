@@ -17,11 +17,17 @@ initAnalytics();
 function getClientId(callback) {
 	console.log('getClientId');
 	
-	gtag('get', gaID, function(result) {
-		  var clientId = result['client_id'];
-		  console.log('Client ID: ' + clientId);
-		  callback(clientId);
+	ga(function(tracker) {
+		var clientId = tracker.get('clientId');
+		console.log('Client ID: ' + clientId);
+		callback(clientId);
 	});
+	
+	// gtag('get', gaID, function(result) {
+		  // var clientId = result['client_id'];
+		  // console.log('Client ID: ' + clientId);
+		  // callback(clientId);
+	// });
 }
 
 // function getClientId(callback) {
