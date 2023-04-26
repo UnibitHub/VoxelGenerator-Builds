@@ -133,7 +133,9 @@ function initAnalytics(){
 function waitForAnalytics(callback) {
   console.log("waitForAnalytics");
   if (typeof gtag !== 'undefined') {
-    callback();
+    setTimeout(function() {
+      callback();
+    }, 100);
   } else {
     setTimeout(function() {
       waitForAnalytics(callback);
