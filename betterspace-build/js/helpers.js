@@ -9,3 +9,32 @@ function checkIfMobile(){
 	
 	return isMobile;
 }
+
+function checkBrowser(){
+	var check = false; //initiate as false
+	var browserName = getBrowserName();
+	
+	if (browserName != "Google Chrome"){
+		return false;
+	}
+	
+	return true;
+}
+
+function getBrowserName() {
+	var browserName = (function (agent) {        
+		switch (true) {
+            case agent.indexOf("edge") > -1: return "MS Edge";
+            case agent.indexOf("edg/") > -1: return "Edge ( chromium based)";
+            case agent.indexOf("opr") > -1 && !!window.opr: return "Opera";
+            case agent.indexOf("chrome") > -1 && !!window.chrome: return "Google Chrome";
+            case agent.indexOf("trident") > -1: return "MS IE";
+            case agent.indexOf("firefox") > -1: return "Mozilla Firefox";
+            case agent.indexOf("safari") > -1: return "Safari";
+            default: return "other";
+        }
+    })(window.navigator.userAgent.toLowerCase());
+	
+	return browserName;
+}
+

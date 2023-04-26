@@ -97,6 +97,10 @@
 		sendEvent("HTML-No_Mobile_Version-Screen-Showed");
 	}
 	else{
+		if (!checkBrowser()){
+			sendEvent("HTML-Detect_Incorrect_Browser");
+		}
+	
 		mobile_error.remove();
 		var canvas = document.querySelector("#unity-canvas");
 		var loader_canvas = document.querySelector("#loader_canvas");
