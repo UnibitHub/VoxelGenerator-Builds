@@ -23,7 +23,7 @@ function sendEvent(eventName) {
 				 "session_id": currentSessionId,
 				 // "insert_id":"638179608219672505_-417362788",
 				 "user_id": clientId,
-				 //"app_version": "1.1.35",
+				 "app_version": app_version,
 				 "platform":"HTML",
 				 "event_type": eventName,
 			  }
