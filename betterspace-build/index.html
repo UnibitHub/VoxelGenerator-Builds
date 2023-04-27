@@ -128,18 +128,18 @@
 		}
 
 		var buildUrl = "Build";
-		var loaderUrl = buildUrl + "/betterspace-build.loader.js";
-		var config = {
-		  dataUrl: buildUrl + "/betterspace-build.data.unityweb",
-		  frameworkUrl: buildUrl + "/betterspace-build.framework.js.unityweb",
-		  codeUrl: buildUrl + "/betterspace-build.wasm.unityweb",
-		  symbolsUrl: buildUrl + "/",
-		  streamingAssetsUrl: "StreamingAssets",
-		  companyName: "DefaultCompany",
-		  productName: "MegaMod",
-		  productVersion: "0.1",
-		  showBanner: unityShowBanner,
-		};
+		  var loaderUrl = buildUrl + "/betterspace-build.loader.js";
+		  var config = {
+			dataUrl: buildUrl + "/betterspace-build.data",
+			frameworkUrl: buildUrl + "/betterspace-build.framework.js",
+			codeUrl: buildUrl + "/betterspace-build.wasm",
+			symbolsUrl: buildUrl + "/",
+			streamingAssetsUrl: "StreamingAssets",
+			companyName: "DefaultCompany",
+			productName: "MegaMod",
+			productVersion: "1.1.48",
+			showBanner: unityShowBanner,
+		  };
 
 		if (((window.innerWidth * 0.8) * (720 / 1280)) > (window.innerHeight * 0.8)) {
 		  canvas.style.height = (window.innerHeight * 0.8) + "px";
