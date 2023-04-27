@@ -52,7 +52,8 @@ function sendEventLogic(eventName, requestNumber){
 				},
 				body: JSON.stringify(myBody)
 			})
-			.then(response => _lastRequestNumber++);
+			.then(response => _lastRequestNumber++)
+			.then(response => console.log("event successfuly sent: " + eventName));
 			//.then(response => response.json())
 			//.then(response => console.log(JSON.stringify(response)));
 		}
