@@ -2,18 +2,18 @@ var _lastRequestNumber = 0;
 var _currentRequestNumber = 0;
 
 function sendEvent(eventName) {
-	_currentRequestNumber = _currentRequestNumber + 1;
-	sendEventLogic(eventName);
+	console.log("sendEvent: " + eventName);
+	var requestNumber = _currentRequestNumber++;
+	sendEventLogic(eventName, requestNumber);
 }
 
-function sendEventLogic(eventName){
+function sendEventLogic(eventName, requestNumber){
 	if (clientId !== "") {
-		if (_lastRequestNumber != _currentRequestNumber){
+		if (_lastRequestNumber != requestNumber){
 			setTimeout(function() {
-				sendEventLogic(eventName);
+				sendEventLogic(eventName, requestNumber);
 			}, 100);
 		} else{
-			console.log("sendEvent: " + eventName);
 			
 			var myBody = 
 			{
@@ -58,7 +58,7 @@ function sendEventLogic(eventName){
 		}
 	  } else {
 		setTimeout(function() {
-		  sendEventLogic(eventName);
+		  sendEventLogic(eventName, requestNumber);
 		}, 100);
 	}
 }
