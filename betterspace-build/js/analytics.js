@@ -72,24 +72,25 @@ function startYandexAnalytics(){
 }
 
 function getSessionId() {
-  let sessionId = sessionStorage.getItem('sessionId');
-  if (!sessionId) {
-    sessionId = generateSessionId(); 
-    sessionStorage.setItem('sessionId', sessionId); 
-  }
-  
-  console.log('getSessionId: ' + sessionId);
-  return sessionId;
+	let sessionId = sessionStorage.getItem('sessionId');
+	if (!sessionId) {
+	sessionId = generateSessionId(); 
+	sessionStorage.setItem('sessionId', sessionId); 
+	}
+
+	console.log('getSessionId: ' + sessionId);
+	return sessionId;
 }
 
 function getCurrentSessionId() {
-  return currentSessionId;
+	console.log('getCurrentSessionId: ' + currentSessionId);
+	return currentSessionId;
 }
 
 function generateSessionId() {
-  var currentDate = new Date().getTime();
-  var sessionId = currentDate * 1000000 + Math.floor(Math.random() * 1000000);
-  return sessionId;
+	var currentDate = new Date().getTime();
+	var sessionId = currentDate * 1000000 + Math.floor(Math.random() * 1000000);
+	return sessionId;
 }
 
 function initAnalytics(){
