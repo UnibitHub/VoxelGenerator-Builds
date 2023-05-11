@@ -71,16 +71,16 @@ function startYandexAnalytics(){
    });
 }
 
-function getSessionId() {
-	let sessionId = sessionStorage.getItem('sessionId');
-	if (!sessionId) {
-	sessionId = generateSessionId(); 
-	sessionStorage.setItem('sessionId', sessionId); 
-	}
+// function getSessionId() {
+	// let sessionId = sessionStorage.getItem('sessionId');
+	// if (!sessionId) {
+	// sessionId = generateSessionId(); 
+	// sessionStorage.setItem('sessionId', sessionId); 
+	// }
 
-	console.log('getSessionId: ' + sessionId);
-	return sessionId;
-}
+	// console.log('getSessionId: ' + sessionId);
+	// return sessionId;
+// }
 
 function getCurrentSessionId() {
 	console.log('getCurrentSessionId: ' + currentSessionId);
@@ -97,7 +97,7 @@ function initAnalytics(){
 	console.log("initAnalytics");
 	
 	startYandexAnalytics();
-	currentSessionId = getSessionId();
+	currentSessionId = generateSessionId(); 
 	
 	waitForAnalytics(function() {
 		console.log('Google Analytics initialized!');
